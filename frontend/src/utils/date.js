@@ -10,10 +10,16 @@ export function toISO(date) {
   return new DateObject(date).convert(gregorian, gregorian_en).format('YYYY-MM-DD')
 }
 
-// "2026-10-07" -> "۱۵ مهر" برای نمایش به کاربر
+const yearOf = (d) => d.toLocaleDateString('fa-IR', { year: 'numeric' })
+
+// "2026-10-07" -> "۱۵ مهر" (اگر سال جاری نباشد سال هم اضافه می‌شود)
 export function formatFa(iso) {
-  return new Date(iso + 'T00:00:00').toLocaleDateString('fa-IR', {
+  const d = new Date(iso + 'T00:00:00')
+  const sameYear = yearOf(d) === yearOf(new Date())
+  return d.toLocaleDateString('fa-IR', {
     day: 'numeric',
     month: 'long',
+    ...(sameYear ? {} : { year: 'numeric' }),
   })
 }
+

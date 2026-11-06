@@ -1,17 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-// یک تابع async را یک‌بار اجرا می‌کند و { data, loading, error } برمی‌گرداند.
+// یک تابع async را یک‌بار اجرا می‌کند و { data, loading, error, reload } برمی‌گرداند.
+// reload() همان تابع را دوباره اجرا می‌کند (داده‌ی قبلی تا رسیدن جواب نگه داشته می‌شود).
 export default function useLoad(fn) {
   const [state, setState] = useState({ data: null, loading: true, error: null })
+  const fnRef = useRef(fn)
+  const lastRequest = useRef(0) // جواب‌های قدیمی را نادیده می‌گیرد
 
-  useEffect(() => {
-    let cancelled = false
-    fn()
-      .then((data) => !cancelled && setState({ data, loading: false, error: null }))
-      .catch((e) => !cancelled && setState({ data: null, loading: false, error: e.message }))
-    return () => { cancelled = true }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const reload = useCallback(() => {
+    const id = ++lastRequest.current
+    setState((s) => ({ ...s, loading: true }))
+    fnRef.current()
+      .then((data) => id === lastRequest.current && setState({ data, loading: false, error: null }))
+      .catch((e) => id === lastRequest.current && setState((s) => ({ ...s, loading: false, error: e.message })))
   }, [])
 
-  return state
+  useEffect(() => {
+    reload()
+    return () => { lastRequest.current++ }
+  }, [reload])
+
+  return { ...state, reload }
 }
