@@ -1,15 +1,18 @@
 import { Link } from 'react-router-dom'
-import Card from '../Card.jsx'
-import { formatFa } from '../../utils/date.js'
+import OperationCard from '../OperationCard.jsx'
 
-export default function UpcomingTasks({ data, loading, error }) {
+// کارهای پیش رو: سه عملیات باز با نزدیک‌ترین تاریخ، با همان کارت عملیات همه‌جا.
+// reload از useLoad می‌آید و بعد از هر تغییر (انجام، لغو، حذف، ویرایش) لیست را تازه می‌کند.
+export default function UpcomingTasks({ data, loading, error, reload }) {
   const tasks = (data ?? []).slice(0, 3)
 
   return (
-    <Card title="کارهای پیش رو">
-      {loading && (
-        <div className="space-y-2">
-          {[0, 1, 2].map((i) => <div key={i} className="h-12 animate-pulse rounded-xl bg-primary-soft" />)}
+    <section>
+      <h2 className="mb-3 text-lg font-bold">کارهای پیش رو</h2>
+
+      {loading && !data && (
+        <div className="space-y-3">
+          {[0, 1, 2].map((i) => <div key={i} className="h-[92px] animate-pulse rounded-xl bg-primary-soft" />)}
         </div>
       )}
 
@@ -19,20 +22,13 @@ export default function UpcomingTasks({ data, loading, error }) {
         <p className="text-sm text-muted">کاری برای روزهای آینده ثبت نشده.</p>
       )}
 
-      <ul className="space-y-2">
-        {tasks.map((t) => (
-          <li key={t.id} className="flex items-center justify-between gap-3 rounded-xl bg-bg px-3 py-3">
-            <Link to={`/operations/${t.id}`} className="font-medium text-primary">{t.title}</Link>
-            <span className="shrink-0 rounded-lg bg-wheat/25 px-2.5 py-1 text-sm text-soil">
-              {formatFa(t.date)}
-            </span>
-          </li>
-        ))}
+      <ul className="space-y-3">
+        {tasks.map((t) => <OperationCard key={t.id} op={t} onChange={reload} />)}
       </ul>
 
       <Link to="/calendar" className="mt-4 inline-block text-sm font-medium text-primary">
         مشاهده‌ی تقویم کشاورزی
       </Link>
-    </Card>
+    </section>
   )
 }

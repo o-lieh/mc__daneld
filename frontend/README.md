@@ -1,26 +1,194 @@
-# Farm Management Frontend
+\# Farm App – Frontend
 
-Run the backend and apply its migrations first:
 
-```powershell
-.\.venv313\Scripts\alembic.exe upgrade head
-.\.venv313\Scripts\uvicorn.exe app.main:app --reload
+
+\## Overview
+
+
+
+This is the frontend of farm application built with React and Vite. It uses Tailwind CSS for styling and provides a modern development environment with reusable UI libraries and components.
+
+
+
+\## Tech Stack
+
+
+
+\- \*\*React 19\*\* – Frontend library
+
+\- \*\*Vite 8\*\* – Development server and build tool
+
+\- \*\*Tailwind CSS 4\*\* – Utility-first CSS framework
+
+\- \*\*React Router DOM 7\*\* – Client-side routing
+
+\- \*\*React Hook Form\*\* – Form management
+
+\- \*\*Lucide React\*\* – Icon library
+
+\- \*\*React Multi Date Picker\*\* – Date picker component
+
+\- \*\*Vazirmatn\*\* – Typography and font support
+
+
+
+\## Prerequisites
+
+
+
+Make sure the following tools are installed before running the project:
+
+
+
+\- \*\*Node.js:\*\* `20.19+` or `22.12+`
+
+\- \*\*npm:\*\* Included with Node.js
+
+\- \*\*Git:\*\* Required to clone the repository
+
+
+
+You can verify your installations using:
+
+
+
+```bash
+
+node -v
+
+npm -v
+
+git --version
+
 ```
 
-Then run the frontend in a separate terminal:
 
-```powershell
-cd frontend
+
+\## Getting Started
+
+
+
+\### 1. Clone the Repository
+
+
+
+```bash
+
+git clone https://github.com/o-lieh/mc\_\_daneld.git
+
+```
+
+
+
+\### 2. Navigate to the Project Directory
+
+
+
+```bash
+
+cd <project-directory>
+
+```
+
+
+
+\### 3. Install Dependencies
+
+
+
+Install all required dependencies using npm:
+
+
+
+```bash
+
 npm ci
-npm run dev
+
 ```
 
-Open `http://localhost:5173`. Vite proxies `/api` to `http://localhost:8000`, so
-the default frontend needs no CORS setting. For a separately hosted API, set
-`VITE_API_URL` to its full `/api/v1` URL and allow the frontend origin with the
-backend's `CORS_ORIGINS` setting.
 
-Run `python -m app.reminders.worker` in another terminal to publish due in-app
-notifications. The frontend now uses the real FastAPI endpoints; mock data is
-not used. A reminder entered in the form uses the browser device's local time.
+
+This command installs the exact dependency versions specified in `package-lock.json`.
+
+
+
+Alternatively, you can use:
+
+
+
+```bash
+
+npm install
+
+```
+
+
+
+\### 4. Start the Development Server
+
+
+
+Run the following command:
+
+
+
+```bash
+
+npm run dev
+
+```
+
+
+
+Vite will start the local development server. Open the URL displayed in your terminal (usually `http://localhost:5173`) in your browser.
+
+
+
+\## Available Scripts
+
+
+
+| Command | Description |
+
+|---|---|
+
+| `npm run dev` | Starts the development server |
+
+| `npm run build` | Creates an optimized production build |
+
+| `npm run preview` | Previews the production build locally |
+
+
+
+\## Building for Production
+
+
+
+To generate the production-ready files, run:
+
+
+
+```bash
+
+npm run build
+
+```
+
+
+
+The generated build files will be available in the `dist/` directory.
+
+
+
+To preview the production build locally:
+
+
+
+```bash
+
+npm run preview
+
+```
+
+
 
