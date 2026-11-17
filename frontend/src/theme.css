@@ -7,17 +7,20 @@
 @theme {
   --font-sans: "Vazirmatn", system-ui, sans-serif;
 
-  --color-primary: #2f6b3a;       /* سبز برگ: دکمه‌ها و لینک‌ها */
-  --color-primary-dark: #24542d;  /* حالت hover */
-  --color-primary-soft: #e1ecd8;  /* سبز خیلی روشن: پس‌زمینه‌های ملایم */
-  --color-soil: #7a5c3e;          /* خاک: متن فرعی و جزئیات */
-  --color-wheat: #d9b45b;         /* گندم: تاکید و فوکوس */
-  --color-bg: #f1f5ea;            /* پس‌زمینه صفحه */
-  --color-surface: #ffffff;       /* کارت‌ها و فرم‌ها */
-  --color-ink: #243020;           /* متن اصلی */
-  --color-muted: #66715c;         /* متن کم‌رنگ */
-  --color-line: #d5ddc9;          /* خط دور فیلدها */
-  --color-danger: #b3422f;        /* خطا */
+ --color-primary: #2f6b3a;              /* سبز برگ: دکمه‌ها و لینک‌ها */
+  --color-primary-dark: #24542d;          /* حالت hover */
+ --color-primary-soft: #f3f3f3;          /* سبز خیلی روشن: پس‌زمینه‌های ملایم */
+  --color-soil: #7a5c3e;                   /* خاک: متن فرعی و جزئیات */
+  --color-wheat: #61371e;                  /* گندم: تاکید و فوکوس */
+  --color-bg: #f3f3f3;                     /* پس‌زمینه صفحه */
+  --color-surface: #ffffff;                /* کارت‌ها و فرم‌ها */
+  --color-ink: #243020;                    /* متن اصلی */
+  --color-muted: #66715c;                  /* متن کم‌رنگ */
+  --color-line: #d5ddc9;                   /* خط دور فیلدها */
+  --color-danger: #b3422f;                 /* خطا */
+ --color-late: #c0392b;                    /* قرمز: عملیات عقب‌افتاده */
+  --color-due: #e0a800;                     /* زرد: عملیات امروز */
+  --color-ok: #3d9150;                      /* سبز: وضعیت عادی */
 }
 
 body {
@@ -26,11 +29,11 @@ body {
   color: var(--color-ink);
 }
 
-/* خطوط شیار زمین: پس‌زمینه ملایم صفحه‌های ورود و ثبت‌نام */
-.furrows {
-  background-image: repeating-linear-gradient(
-    172deg,
-    transparent 0 26px,
-    var(--color-primary-soft) 26px 29px
-  );
+:root {
+  --type-irrigation: #2e7e9b;   /* آبی */
+  --type-fertilizing: #e0a73a;  /* زرد */
+  --type-harvesting: #14663a;   /* سبز پررنگ */
+  --type-spraying: #b3202e;     /* قرمز */
+  --type-planting: #8cc084;     /* سبز کمرنگ */
+  --type-other: #8a9480;        /* خاکستری */
 }
